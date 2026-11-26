@@ -1,4 +1,4 @@
-var CACHE = 'sajjel-v1';
+var CACHE = 'sajjel-v2';
 var ASSETS = ['./', 'index.html', 'style.css', 'app.js', 'recorder-core.js', 'i18n.js', 'db.js', 'manifest.json', 'favicon.svg', 'logo.svg'];
 self.addEventListener('install', function (e) {
   e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(ASSETS); }).then(function () { return self.skipWaiting(); }));

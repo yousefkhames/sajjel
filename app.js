@@ -11,6 +11,8 @@
   var settings = loadSettings();
 
   var state = 'idle';          // state machine state
+  // closing or reloading the tab while recording would lose the clip: ask the browser to confirm
+  window.addEventListener('beforeunload', function (e) { if (state === 'recording' || state === 'paused') { e.preventDefault(); e.returnValue = ''; } });
   var stream = null;           // display stream
   var micStream = null;
   var audioCtx = null;

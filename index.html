@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sajjel · سجّل — Screen recorder in your browser</title>
+<meta name="description" content="Record your screen in the browser and download the video instantly. No install, no account, no upload. Arabic and English.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0d0f12">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <img src="logo.svg" alt="" width="34" height="34">
+    <div>
+      <strong id="brandName">سجّل</strong>
+      <span id="brandTag" class="tagline"></span>
+    </div>
+  </div>
+  <button id="langBtn" class="ghostbtn" type="button">English</button>
+</header>
+
+<main>
+  <section id="hero">
+    <h1 id="heroTitle"></h1>
+    <p id="heroSub"></p>
+  </section>
+
+  <div id="unsupported" class="notice" hidden></div>
+
+  <nav class="tabs" aria-label="sections">
+    <button class="tab on" data-tab="record" type="button"><span data-i="tabRecord"></span></button>
+    <button class="tab" data-tab="library" type="button"><span data-i="tabLibrary"></span> <b id="libCount" class="count" hidden>0</b></button>
+    <button class="tab" data-tab="settings" type="button"><span data-i="tabSettings"></span></button>
+  </nav>
+
+  <!-- RECORD -->
+  <section id="pane-record" class="pane on">
+    <div class="stage">
+      <div id="onair" class="onair" hidden><i></i><span data-i="onAir"></span> <b id="onairTime">00:00</b></div>
+      <video id="preview" muted playsinline hidden></video>
+      <div id="countOverlay" class="countoverlay" hidden></div>
+      <div id="stageHint" class="stagehint">
+        <strong data-i="pickup"></strong>
+        <span data-i="pickupHint"></span>
+      </div>
+    </div>
+
+    <div class="timer" id="bigTimer">00:00</div>
+    <div id="pausedChip" class="chip" hidden><span data-i="pausedChip"></span></div>
+    <div id="statusLine" class="status"></div>
+
+    <div class="controls">
+      <button id="recordBtn" class="recbtn" type="button" aria-label="record"><i></i></button>
+      <button id="pauseBtn" class="roundbtn" type="button" hidden>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path id="pauseIcon" fill="currentColor" d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+        <span id="pauseLabel" data-i="pause"></span>
+      </button>
+    </div>
+
+    <div id="estLine" class="estline" hidden></div>
+  </section>
+
+  <!-- LIBRARY -->
+  <section id="pane-library" class="pane">
+    <div class="storagerow">
+      <div class="meter"><i id="meterFill"></i></div>
+      <div class="storagetxt"><span data-i="storageUsed"></span>: <b id="storageVal">0 B</b></div>
+    </div>
+    <p class="hint" data-i="storageNote"></p>
+    <div id="libList" class="liblist"></div>
+    <p id="libEmpty" class="empty" data-i="emptyLibrary"></p>
+    <details class="demo">
+      <summary data-i="demoClip"></summary>
+      <p class="hint" data-i="demoHint"></p>
+      <button id="demoBtn" class="ghostbtn" type="button"><span data-i="demoClip"></span></button>
+    </details>
+  </section>
+
+  <!-- SETTINGS -->
+  <section id="pane-settings" class="pane">
+    <div class="setrow">
+      <div><b data-i="quality"></b></div>
+      <div class="segs" id="qualitySeg">
+        <button data-v="hd" type="button"><span data-i="q_hd"></span></button>
+        <button data-v="fullhd" type="button"><span data-i="q_fullhd"></span></button>
+        <button data-v="source" type="button"><span data-i="q_source"></span></button>
+      </div>
+    </div>
+    <div class="setrow">
+      <div><b data-i="fps"></b></div>
+      <div class="segs" id="fpsSeg">
+        <button data-v="30" type="button">30</button>
+        <button data-v="60" type="button">60</button>
+      </div>
+    </div>
+    <div class="setrow">
+      <div><b data-i="bitrate"></b></div>
+      <div class="segs" id="bitrateSeg">
+        <button data-v="saver" type="button"><span data-i="b_saver"></span></button>
+        <button data-v="balanced" type="button"><span data-i="b_balanced"></span></button>
+        <button data-v="crisp" type="button"><span data-i="b_crisp"></span></button>
+      </div>
+    </div>
+    <label class="switchrow">
+      <input type="checkbox" id="micSw">
+      <span class="sw"></span>
+      <span class="swtxt"><b data-i="mic"></b><small data-i="micHint"></small></span>
+    </label>
+    <label class="switchrow">
+      <input type="checkbox" id="sysSw">
+      <span class="sw"></span>
+      <span class="swtxt"><b data-i="sysAudio"></b><small data-i="sysAudioHint"></small></span>
+    </label>
+    <label class="switchrow">
+      <input type="checkbox" id="countSw">
+      <span class="sw"></span>
+      <span class="swtxt"><b data-i="countdown"></b><small data-i="countdownHint"></small></span>
+    </label>
+  </section>
+</main>
+
+<footer><span data-i="footer"></span></footer>
+
+<dialog id="playerDialog">
+  <div class="dlgbar"><b id="dlgTitle"></b><button id="dlgClose" class="ghostbtn" type="button"><span data-i="close"></span></button></div>
+  <video id="playerVideo" controls playsinline></video>
+</dialog>
+
+<script src="recorder-core.js"></script>
+<script src="i18n.js"></script>
+<script src="db.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

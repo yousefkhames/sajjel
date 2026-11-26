@@ -1,0 +1,13 @@
+{
+  "name": "sajjel",
+  "version": "1.0.0",
+  "description": "In-browser screen recorder with instant download. No install, no account, no server.",
+  "scripts": {
+    "test": "node tests/core.test.js",
+    "e2e": "node tests/e2e.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer-core": "^25.19.0"
+  }
+}

@@ -15,6 +15,15 @@ Sajjel is a screen recorder that runs entirely in the browser. It uses `getDispl
 <img src="docs/5-library-en.png" width="240" alt="Library, English">
 </p>
 
+## Screenshots
+
+Captured from the live site (https://yousefkhames.github.io/sajjel/).
+
+<p>
+  <img src="docs/screenshots/live-desktop.png" alt="sajjel desktop view" width="640">
+  <img src="docs/screenshots/live-mobile.png" alt="sajjel mobile view" width="200">
+</p>
+
 ## Features
 
 - One-tap screen recording: pick a tab, window or full screen in the browser's own picker.

@@ -61,3 +61,10 @@ The e2e script drives headless Chrome through the whole flow: language toggle, s
 ## License
 
 MIT
+
+
+## Demo / portfolio project
+
+Static GitHub Pages site. Data stays in your browser. Sample data is fictional and results are not professional, legal, medical or financial advice.
+
+By Yousef Khames · من تطوير يوسف خميس
